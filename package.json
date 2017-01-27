@@ -13,7 +13,9 @@
   "keywords": [
     "rpi",
     "raspberry",
-    "pi"
+    "pi",
+    "serial",
+    "number"
   ],
   "author": "Nicolas Abbal <nicolas.abbal@gmail.com>",
   "license": "MIT",
