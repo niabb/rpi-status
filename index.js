@@ -2,6 +2,7 @@
 
 const os = require('os');
 const fs = require('fs');
+const exec = require('child_process').execSync;
 
 function getSerialNumber() {
   const content = fs.readFileSync('/proc/cpuinfo', 'utf8');
@@ -20,7 +21,8 @@ function getSerialNumber() {
 function getAll() {
   return {
     hostname:os.hostname(), 
-    uptimeSeconds: os.uptime(), 
+    uptimeSeconds: os.uptime(),
+    dateTime: new Date(),
     os:os.type()+ ' '+os.arch()+ ' '+os.release(), 
     freememBytes:os.freemem(), 
     totalmemBytes:os.totalmem(), 

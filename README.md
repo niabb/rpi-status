@@ -9,7 +9,7 @@ You can get the stringified object directly from the command line:
 
 You will get something like this:
 
-    {"hostname":"myRPI","uptimeSeconds":234380,"os":"Linux arm 4.4.38-v7+","freememBytes":522522624,"totalmemBytes":970477568,"loadavg":[0.03564453125,0.03662109375,0.046875],"serialNumber":"00000000fddddddd"}
+    {"hostname":"myRPI","uptimeSeconds":5624934,"dateTime":"2017-01-29T21:26:58.105Z","os":"Linux arm 4.4.38-v7+","freememBytes":522522624,"totalmemBytes":970477568,"loadavg":[0.03564453125,0.03662109375,0.046875],"serialNumber":"00000000fddddddd"}
 
 ## Node.js module
 You can use this module in one of your project:
