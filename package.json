@@ -1,6 +1,6 @@
 {
   "name": "rpi-status",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A simple module to collect information and statuses on a Raspberry Pi running Raspbian",
   "main": "index.js",
   "scripts": {
