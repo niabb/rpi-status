@@ -18,9 +18,14 @@ function getSerialNumber() {
   return '';
 }
 
+function getUptimeSince() {
+  return new Date(exec('uptime -s', {encoding:'utf8'}));
+}
+
 function getAll() {
   return {
-    hostname:os.hostname(), 
+    hostname:os.hostname(),
+    uptimeSince: getUptimeSince(),
     uptimeSeconds: os.uptime(),
     dateTime: new Date(),
     os:os.type()+ ' '+os.arch()+ ' '+os.release(), 
