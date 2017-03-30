@@ -19,7 +19,14 @@ function getSerialNumber() {
 }
 
 function getUptimeSince() {
-  return new Date(exec('uptime -s', {encoding:'utf8'}));
+  return new Promise((resolve, reject) => {
+    exec('uptime -s', {encoding:'utf8'}, (err, stdout/*, stderr*/) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve(stdout);
+    });
+  });
 }
 
 function isProcessRunning(processName) {
@@ -27,7 +34,7 @@ function isProcessRunning(processName) {
     exec('pgrep '+processName, (err, stdout, stderr) => {
       let res = false;
       if (err) {
-	if(err.code && err.code === 1) {
+	      if(err.code && err.code === 1) {
           return resolve(res);
         } else {
           return reject(err);
@@ -72,7 +79,7 @@ function shutdown() {
     exec('shutdown -h now', (err/*, stdout, stderr*/) => {
     //exec('date', (err, stdout, stderr) => {
       if (err) {
-        console.error(err);
+        //console.error(err);
         return reject(err);
       }
       //console.log(stdout);
