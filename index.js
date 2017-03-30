@@ -120,26 +120,35 @@ function isConnectedToInternet() {
 }
 
 function getAll() {
-  let result = {
-    hostname:os.hostname(),
-    uptimeSince: '',
-    uptimeSeconds: os.uptime(),
-    dateTime: new Date(),
-    os:os.type()+ ' '+os.arch()+ ' '+os.release(), 
-    freememBytes:os.freemem(), 
-    totalmemBytes:os.totalmem(), 
-    loadavg:os.loadavg(), 
-    serialNumber:getSerialNumber()
-  };
-  getUptimeSince().then((up) => {
-    result.uptimeSince = up;
+  return new Promise((resolve, reject) => {
+    let result = {
+      hostname:os.hostname(),
+      uptimeSince: '',
+      uptimeSeconds: os.uptime(),
+      dateTime: new Date(),
+      os:os.type()+ ' '+os.arch()+ ' '+os.release(), 
+      freememBytes:os.freemem(), 
+      totalmemBytes:os.totalmem(), 
+      loadavg:os.loadavg(), 
+      serialNumber:getSerialNumber()
+    };
+    getUptimeSince().then((up) => {
+      result.uptimeSince = up;
+      resolve(result);
+    }).catch((err) => {
+      reject(err);
+    });
   });
-  return result;
 }
 
 
 if(require.main === module) {
-  console.log(JSON.stringify(getAll()));
+  getAll().then((result) => {
+    console.log(JSON.stringify(getAll()));
+  }).catch((err) => {
+    console.log(err);
+  });
+  
 }
 
 module.exports = {getAll, getSerialNumber, isProcessRunning, diskUsage, shutdown, restart, isConnectedToInternet};
