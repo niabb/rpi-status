@@ -120,9 +120,9 @@ function isConnectedToInternet() {
 }
 
 function getAll() {
-  return {
+  let result = {
     hostname:os.hostname(),
-    uptimeSince: getUptimeSince(),
+    uptimeSince: '',
     uptimeSeconds: os.uptime(),
     dateTime: new Date(),
     os:os.type()+ ' '+os.arch()+ ' '+os.release(), 
@@ -131,6 +131,10 @@ function getAll() {
     loadavg:os.loadavg(), 
     serialNumber:getSerialNumber()
   };
+  getUptimeSince().then((up) => {
+    result.uptimeSince = up;
+  });
+  return result;
 }
 
 
