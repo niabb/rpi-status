@@ -22,6 +22,92 @@ function getUptimeSince() {
   return new Date(exec('uptime -s', {encoding:'utf8'}));
 }
 
+function isProcessRunning(processName) {
+  return new Promise((resolve, reject) => { 
+    exec('pgrep '+processName, (err, stdout/*, stderr*/) => {
+      let res = false;
+      if (err) {
+        return reject(err);
+      }
+      //console.log(stdout);
+      if(stdout && stdout !== '') {
+        res = true;
+      }
+      resolve(res);
+    });
+  });
+}
+
+function diskUsage() {
+  return new Promise((resolve, reject) => {
+    exec('df -h', (err, stdout/*, stderr*/) => {
+      if (err) {
+        console.error(err);
+        return reject(err);
+      }
+      let lines = stdout.split('\n');
+      for(let i=1; i<lines.length;i++) {
+        let splittedLine = lines[i].split(' ');
+        let cleanedLine = [];
+        for(let token of splittedLine) {
+          if (token !== '') {
+            cleanedLine.push(token);
+          }
+        }
+        lines[i] = cleanedLine;
+      }
+      lines.shift();
+      //console.log(lines);
+      resolve(lines);
+    });
+  });
+}
+
+function shutdown() {
+  return new Promise((resolve, reject) => {
+    exec('shutdown -h now', (err/*, stdout, stderr*/) => {
+    //exec('date', (err, stdout, stderr) => {
+      if (err) {
+        console.error(err);
+        return reject(err);
+      }
+      //console.log(stdout);
+      resolve();
+    });
+  });
+}
+
+function restart() {
+  return new Promise((resolve, reject) => {
+    exec('shutdown -r now', (err/*, stdout, stderr*/) => {
+      //exec('date', (err, stdout, stderr) => {
+      if (err) {
+        console.error(err);
+        return reject(err);
+      }
+      //console.log(stdout);
+      resolve();
+    });
+  });
+}
+
+function isConnectedToInternet() {
+  return new Promise((resolve, reject) => {
+    exec('ping -qc 1 google.fr >/dev/null && echo ok || echo error', (err, stdout/*, stderr*/) => {
+      if (err) {
+        console.error(err);
+        return reject(err);
+      }
+      //console.error(stdout);
+      if(stdout && stdout.length>1 && stdout.substr(0,2)==='ok') {
+        resolve(true);
+      } else {
+        resolve(false);
+      }
+    });
+  });
+}
+
 function getAll() {
   return {
     hostname:os.hostname(),
@@ -41,4 +127,4 @@ if(require.main === module) {
   console.log(JSON.stringify(getAll()));
 }
 
-module.exports = {getAll, getSerialNumber};
+module.exports = {getAll, getSerialNumber, isProcessRunning, diskUsage, shutdown, restart, isConnectedToInternet};
