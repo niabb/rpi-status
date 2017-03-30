@@ -24,7 +24,7 @@ function getUptimeSince() {
       if (err) {
         return reject(err);
       }
-      resolve(stdout);
+      resolve(stdout.length > 1 ? stdout.substr(0, stdout.length-1) : ''  );
     });
   });
 }
@@ -144,7 +144,7 @@ function getAll() {
 
 if(require.main === module) {
   getAll().then((result) => {
-    console.log(JSON.stringify(getAll()));
+    console.log(JSON.stringify(result));
   }).catch((err) => {
     console.log(err);
   });
