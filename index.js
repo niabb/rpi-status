@@ -2,7 +2,7 @@
 
 const os = require('os');
 const fs = require('fs');
-const exec = require('child_process').execSync;
+const exec = require('child_process').exec;
 
 function getSerialNumber() {
   const content = fs.readFileSync('/proc/cpuinfo', 'utf8');
@@ -24,10 +24,14 @@ function getUptimeSince() {
 
 function isProcessRunning(processName) {
   return new Promise((resolve, reject) => { 
-    exec('pgrep '+processName, (err, stdout/*, stderr*/) => {
+    exec('pgrep '+processName, (err, stdout, stderr) => {
       let res = false;
       if (err) {
-        return reject(err);
+	if(err.code && err.code === 1) {
+          return resolve(res);
+        } else {
+          return reject(err);
+        }
       }
       //console.log(stdout);
       if(stdout && stdout !== '') {
