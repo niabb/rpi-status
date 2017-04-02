@@ -1,6 +1,6 @@
 {
   "name": "rpi-status",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "A simple module to collect information and statuses on a Raspberry Pi running Raspbian, including its serial number.",
   "main": "index.js",
   "scripts": {
