@@ -119,6 +119,25 @@ function isConnectedToInternet() {
   });
 }
 
+function getCpuTemperature() {
+  return new Promise((resolve, reject) => {
+    exec('cat /sys/class/thermal/thermal_zone0/temp', (err, stdout/*, stderr*/) => {
+      if (err) {
+        console.error(err);
+        return reject(err);
+      }
+      //console.error(stdout);
+      if(stdout && stdout.length>1) {
+        let temp = new Number(stdout);
+        temp = temp/1000;
+        resolve(temp);
+      } else {
+        resolve(null);
+      }
+    });
+  });
+}
+
 function getAll() {
   return new Promise((resolve, reject) => {
     let result = {
@@ -130,10 +149,12 @@ function getAll() {
       freememBytes:os.freemem(), 
       totalmemBytes:os.totalmem(), 
       loadavg:os.loadavg(), 
-      serialNumber:getSerialNumber()
+      serialNumber:getSerialNumber(),
+      cpuTemp: null
     };
-    getUptimeSince().then((up) => {
-      result.uptimeSince = up;
+    Promise.all([getUptimeSince(), getCpuTemperature()]).then((values) => {
+      result.uptimeSince = values[0];
+      result.cpuTemp = values[1];
       resolve(result);
     }).catch((err) => {
       reject(err);
