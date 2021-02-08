@@ -1,10 +1,10 @@
 {
   "name": "rpi-status",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "A simple module to collect information and statuses on a Raspberry Pi running Raspbian, including its serial number.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -17,10 +17,25 @@
     "serial",
     "number"
   ],
-  "author": "Nicolas Abbal <nicolas.abbal@gmail.com>",
+  "contributors": [
+    "Nicolas Abbal <nicolas.abbal@gmail.com>",
+    "Carlos Pinto Machado <cpmachado@protonmail.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/niabb/rpi-status/issues"
   },
-  "homepage": "https://github.com/niabb/rpi-status#readme"
+  "homepage": "https://github.com/niabb/rpi-status#readme",
+  "bin": {
+    "rpi-status": "bin/rpi-status.js"
+  },
+  "directories": {
+    "doc": "doc",
+    "lib": "lib"
+  },
+  "devDependencies": {
+    "eslint": "^7.19.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
+  }
 }
