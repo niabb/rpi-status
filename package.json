@@ -1,6 +1,6 @@
 {
   "name": "rpi-status",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "A simple module to collect information and statuses on a Raspberry Pi running Raspbian, including its serial number.",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,10 @@
     "serial",
     "number"
   ],
-  "author": "Nicolas Abbal <nicolas.abbal@gmail.com>",
+  "contributors": [
+    "Nicolas Abbal <nicolas.abbal@gmail.com>",
+    "Carlos Pinto Machado <cpmachado@protonmail.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/niabb/rpi-status/issues"
