@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
-const {getAll} = require('..');
-
+const { getAll } = require('..');
 
 getAll().then((result) => {
   console.log(JSON.stringify(result, null, 2));

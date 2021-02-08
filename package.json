@@ -4,7 +4,7 @@
   "description": "A simple module to collect information and statuses on a Raspberry Pi running Raspbian, including its serial number.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -29,5 +29,10 @@
   "directories": {
     "doc": "doc",
     "lib": "lib"
+  },
+  "devDependencies": {
+    "eslint": "^7.19.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
   }
 }
