@@ -162,14 +162,4 @@ function getAll() {
   });
 }
 
-
-if(require.main === module) {
-  getAll().then((result) => {
-    console.log(JSON.stringify(result));
-  }).catch((err) => {
-    console.log(err);
-  });
-  
-}
-
 module.exports = {getAll, getSerialNumber, isProcessRunning, diskUsage, shutdown, restart, isConnectedToInternet};

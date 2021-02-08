@@ -22,5 +22,12 @@
   "bugs": {
     "url": "https://github.com/niabb/rpi-status/issues"
   },
-  "homepage": "https://github.com/niabb/rpi-status#readme"
+  "homepage": "https://github.com/niabb/rpi-status#readme",
+  "bin": {
+    "rpi-status": "bin/rpi-status.js"
+  },
+  "directories": {
+    "doc": "doc",
+    "lib": "lib"
+  }
 }
